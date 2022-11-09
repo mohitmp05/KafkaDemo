@@ -17,18 +17,19 @@ public class KafkaPublisherController {
 	@Autowired
 	private KafkaService service;
 
-	private String topic = "test-topic";
+	private String topic1 = "nametopic";
+	private String topic2 = "usertopic";
 
 	@GetMapping("/publish/{name}")
 	public String publishMessage(@PathVariable String name){
-		template.send(topic,"Hi "+name+" Welcome");
+		template.send(topic1,"Hi "+name+" Welcome");
 		return "Data published";
 	}
 
 	@GetMapping("/publishJson/{id}")
 	public String publishMessage(@PathVariable Long id){
 		User user = this.service.getUser(id);
-		template.send(topic,user);
+		template.send(topic2,user);
 		return "Data published of "+user.getName();
 	}
 }
